@@ -1,9 +1,14 @@
-FROM ubuntu
-RUN apt-get update
-RUN apt-get install -y python python-pip
-RUN pip install flask
-COPY  app.py /opt/app.py
+# Use official Python image
+FROM python:3.10
+
+WORKDIR /opt
+
+# Install Flask
+RUN pip install --no-cache-dir flask
+
+# Copy the application file
+COPY app.py /opt/app.py
+
 EXPOSE 5000
 
-# Run the Flask app
 CMD ["python", "app.py"]
